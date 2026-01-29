@@ -4,9 +4,9 @@ A comprehensive research codebase for studying Neural Collapse (NC) phenomena in
 
 ## Features
 
-- **16+ Model Architectures**: ResNet, VGG, ViT, MobileNet, EfficientNet, DenseNet, ConvNeXt, DINOv3, EVA-02, and more
+- **14+ Model Architectures**: ResNet, VGG, ViT, MobileNet, EfficientNet, DenseNet, DINOv3, and more
 - **Multiple Loss Functions**: Cross-Entropy, Focal Loss, Logit Adjustment, Balanced Softmax
-- **Imbalanced Dataset Generation**: Configurable long-tailed distributions for MNIST, Fashion-MNIST, CIFAR-10/100, SVHN, ImageNet-LT
+- **Imbalanced Dataset Generation**: Configurable long-tailed distributions for MNIST, Fashion-MNIST, CIFAR-10/100
 - **Neural Collapse Metrics**: Drift norm, overall accuracy, tail accuracy, layer-wise analysis
 - **Distributed Training**: GPU job queue system for running large-scale experiments
 
@@ -113,14 +113,14 @@ The codebase includes 10 pre-configured experiment groups:
 7. **exp7 - Batch Size**: Robustness to batch size variations
 8. **exp8 - ViT Ablation**: LayerNorm impact on NC in Vision Transformers
 9. **exp9 - Reproducibility**: Repeated runs for statistical significance
-10. **exp10 - ImageNet-LT**: Large-scale experiments on ImageNet Long-Tail
-
+10. Other exp.
+    
 ## Configuration Format
 
 ```yaml
 exp_name: "exp1_univ_cifar10_resnet18"
 dataset:
-  name: "cifar10"              # mnist, fmnist, cifar10, cifar100, imagenet_lt
+  name: "cifar10"              # mnist, fmnist, cifar10, cifar100
   imb_factor: 0.01             # 1.0=balanced, 0.01=extreme, -1=native
 model:
   name: "resnet18"             # See architectures.py for full list
@@ -148,7 +148,7 @@ train:
 - DenseNet-121
 - EfficientNet-B0
 - GoogLeNet
-- ConvNeXt-Tiny
+
 
 ### Vision Transformers
 - ViT-Tiny (modified for NC)
@@ -158,7 +158,6 @@ train:
 - MobileNetV4-Small
 - RepViT-M1
 - DINOv3-Small
-- EVA-02-Tiny
 
 ## Output Structure
 
@@ -211,7 +210,7 @@ criterion = LogitAdjustmentLoss(cls_num_list=data_gen.img_num_list, tau=1.0)
 ### Model Architecture Constraints
 - All classifiers use `bias=False` to facilitate NC analysis
 - ViT models require `encoder.ln = nn.Identity()` to observe NC
-- Modern models (EVA-02, DINOv3) use CLS token pooling
+- Modern models (DINOv3) use CLS token pooling
 
 ### Feature Extraction
 - `get_feature()` returns features AFTER normalization layers but BEFORE the final classifier
