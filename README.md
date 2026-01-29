@@ -120,13 +120,13 @@ The codebase includes 10 pre-configured experiment groups:
 ```yaml
 exp_name: "exp1_univ_cifar10_resnet18"
 dataset:
-  name: "cifar10"              # mnist, fmnist, cifar10, cifar100, svhn, imagenet_lt
+  name: "cifar10"              # mnist, fmnist, cifar10, cifar100, imagenet_lt
   imb_factor: 0.01             # 1.0=balanced, 0.01=extreme, -1=native
 model:
   name: "resnet18"             # See architectures.py for full list
 train:
-  lr: 0.05
-  optimizer: "sgd"             # sgd, adam, adamw, rmsprop
+  lr: 0.1
+  optimizer: "sgd"             # sgd, adam, rmsprop
   weight_decay: 1e-3
   loss: "ce"                   # ce, focal, logit_adjustment, balanced_softmax
   drift_penalty: 0.0           # Optional drift regularization
