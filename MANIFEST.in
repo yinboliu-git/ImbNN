@@ -1,0 +1,7 @@
+include README.md
+include LICENSE
+include requirements.txt
+include CLAUDE.md
+recursive-include src *.py
+recursive-include configs *.yaml
+recursive-include scripts *.py *.sh
