@@ -189,3 +189,31 @@ class ImbalancedDatasetGenerator:
             shuffle=True, 
             num_workers=num_workers
         )
+    def get_test_loader(self, batch_size=128, num_workers=4):
+        base_transform = transforms.Compose([
+            transforms.Resize((32, 32)),
+            transforms.ToTensor(),
+            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+        ])
+        test_dataset = None
+        if self.name == 'cifar10':
+            test_dataset = datasets.CIFAR10(self.root, train=False, download=True, transform=base_transform)
+        elif self.name == 'cifar100':
+            test_dataset = datasets.CIFAR100(self.root, train=False, download=True, transform=base_transform)
+        elif self.name == 'mnist':
+            full_tf = transforms.Compose([transforms.Grayscale(3), base_transform])
+            test_dataset = datasets.MNIST(self.root, train=False, download=True, transform=full_tf)
+        elif self.name == 'fmnist':
+            full_tf = transforms.Compose([transforms.Grayscale(3), base_transform])
+            test_dataset = datasets.FashionMNIST(self.root, train=False, download=True, transform=full_tf)
+            
+        if test_dataset is None:
+            raise ValueError(f"Test dataset loading not implemented for {self.name}")
+            
+        return DataLoader(
+            test_dataset, 
+            batch_size=batch_size, 
+            pin_memory=True, 
+            shuffle=False, # 测试集不需要 shuffle
+            num_workers=num_workers
+        )
