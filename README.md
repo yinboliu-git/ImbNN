@@ -226,11 +226,11 @@ criterion = LogitAdjustmentLoss(cls_num_list=data_gen.img_num_list, tau=1.0)
 If you use this code in your research, please cite:
 
 ```bibtex
-@article{anonymous2024nc,
+@article{anonymous2026nc,
   title={Neural Collapse in Imbalanced Learning},
   author={Anonymous},
   journal={Under Review},
-  year={2024}
+  year={2026}
 }
 ```
 
